@@ -1,81 +1,63 @@
 package tn.tuniprob.gestionmagasin;
 
+import java.util.Date;
+
 public class Produit {
+    int id;
+    String libelle;
+    String marque;
+    double prix;
+    Date dateExpiration;
 
-  private   int identifiant;
-  private    String marque,libelle;
-  private   float prix;
-
-
-  public void setPrix(float prix)
-  {
-      if(prix>0)
-          this.prix=prix;
-      else System.out.println("le prix doit être positif");
-  }
-
-  public float getPrix()
-  {
-      return prix;
-  }
-
-    public int getIdentifiant() {
-        return identifiant;
+    public Produit() {
     }
 
-    public void setIdentifiant(int identifiant) {
-        this.identifiant = identifiant;
-    }
-
-    public String getMarque() {
-        return marque;
-    }
-
-    public void setMarque(String marque) {
-        this.marque = marque;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
+    public Produit(int id, String libelle, String marque, double prix) {
+        this.id = id;
         this.libelle = libelle;
+        this.marque = marque;
+        this.prix = prix;
     }
 
-    public Produit(int id, String m, String libelle)
-{
+    public void afficher() {
+        System.out.println("ID: " + id);
+        System.out.println("Libellé: " + libelle);
+        System.out.println("Marque: " + marque);
+        System.out.println("Prix: " + prix);
+        System.out.println("Date d'expiration: " + (dateExpiration != null ? dateExpiration : "undefined"));
+    }
 
-    this.identifiant=id;
-    this.marque=m;
-    this.libelle=libelle;
+    @Override
+    public String toString() {
+        return "Produit{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                ", marque='" + marque + '\'' +
+                ", prix=" + prix +
+                ", dateExpiration=" + dateExpiration +
+                '}';
+    }
+
+    // Méthode comparer avec un seul produit en paramètre
+    public boolean comparer(Produit produit2) {
+        if (produit2 == null) {
+            return false;
+        }
+        return this.id == produit2.id &&
+                this.libelle != null && this.libelle.equals(produit2.libelle) &&
+                this.prix == produit2.prix;
+    }
+
+    // Méthode comparer avec deux produits en paramètre
+    public static boolean comparer(Produit produit1, Produit produit2) {
+        if (produit1 == null || produit2 == null) {
+            return false;
+        }
+        return produit1.id == produit2.id &&
+                produit1.libelle != null && produit1.libelle.equals(produit2.libelle) &&
+                produit1.prix == produit2.prix;
+    }
+
 }
-public Produit(int id,String m,String l,float p)
-{
 
-    this.identifiant=id;
-    this.marque=m;
-    this.libelle=l;
-    this.prix=p;
-}
-    public Produit(String libelle,String mar,int id)
-    {
 
-        this.identifiant=id;
-        this.marque=mar;
-        this.libelle=libelle;
-    }
-public Produit(){}
-
-    public void afficher(){
-
-        System.out.println("L'identifiant :"+identifiant+" marque :"+marque+
-                " libelle :"+libelle+" prix :"+prix);
-
-    }
-
-    public String toString(){
-    return "L'identifiant :"+identifiant+" marque :"+marque+
-            " libelle :"+libelle+" prix :"+prix;
-    }
-}
